@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edgerunners | Dossier de Sistema</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cyberp-yellow: #fcee09;
+            --cyberp-cyan: #00f0ff;
+            --cyberp-magenta: #ff003c;
+            --cyberp-dark: #050505;
+            --cyberp-gray: #1a1a1a;
+            --cyberp-blue: #061d2b;
+        }
+
+        body {
+            background-color: var(--cyberp-dark);
+            color: #e0e0e0;
+            font-family: 'Rajdhani', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(rgba(5, 5, 5, 0.8), rgba(5, 5, 5, 0.8)),
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 240, 255, 0.05) 3px, transparent 3px);
+        }
+
+        .cyber-font { font-family: 'Orbitron', sans-serif; }
+
+        .nav-menu {
+            border-bottom: 2px solid var(--cyberp-magenta);
+            background: rgba(10, 10, 10, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            padding: 15px 25px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: 700;
+            transition: all 0.3s;
+            border-bottom: 4px solid transparent;
+            font-size: 0.9rem;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: var(--cp-yellow);
+            border-bottom-color: var(--cyberp-yellow);
+            background: rgba(252, 238, 9, 0.05);
+        }
+
+        .section-container {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .cyber-card {
+            background: rgba(15, 15, 15, 0.9);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            position: relative;
+            padding: 40px;
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);
+            margin-bottom: 30px;
+            height: 100%;
+        }
+
+        .cyber-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--cyberp-yellow);
+        }
+
+        .glitch-text {
+            position: relative;
+            display: inline-block;
+        }
+
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 2px;
+            text-shadow: -2px 0 var(--cyberp-magenta);
+            background: var(--cyberp-dark);
+            overflow: hidden;
+            clip: rect(0, 900px, 0, 0);
+            animation: noise-anim 2s infinite linear alternate-reverse;
+        }
+
+        @keyframes noise-anim {
+            0% { clip: rect(10px, 9999px, 50px, 0); }
+            100% { clip: rect(70px, 9999px, 100px, 0); }
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 250px;
+          ;
+            ;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            color: var(--cyberp-cyan);
+            font-family: 'Orbitron';
+            font-size: 0.7rem;
+            margin-bottom: 15px;
+        }
+
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-bar {
+            height: 4px;
+            background: #333;
+            width: 100%;
+            margin-top: 8px;
+            position: relative;
+        }
+
+        .stat-fill {
+            height: 100%;
+            background: var(--cyberp-yellow);
+        }
+
+        .label-tag {
+            background: var(--cyberp-yellow);
+            color: black;
+            padding: 2px 8px;
+            font-weight: 900;
+            font-size: 0.7rem;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .critic-box {
+            border-left: 2px solid var(--cyberp-magenta);
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+
+        .tech-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .tech-list li::before {
+            content: ">";
+            position: absolute;
+            left: 0;
+            color: var(--cyberp-yellow);
+            font-weight: bold;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <nav class="nav-menu flex justify-center sticky top-0">
+        <div class="nav-item active cyber-font" onclick="scrollToSec('historia')">Dossiê História</div>
+        <div class="nav-item cyber-font" onclick="scrollToSec('personagens')">Equipe & Aliados</div>
+        <div class="nav-item cyber-font" onclick="scrollToSec('estetica')">Estética Visual</div>
+        <div class="nav-item cyber-font" onclick="scrollToSec('sociedade')">Análise Social</div>
+    </nav>
+
+    <header class="h-[60vh] flex flex-col items-center justify-center text-center px-4">
+        <div class="label-tag cyber-font">ACESSO RESTRITO // BANCO DE DADOS AFTERLIFE</div>
+        <h1 class="text-6xl md:text-8xl cyber-font font-black text-yellow-400 mb-4 glitch-text" data-text="EDGERUNNERS">EDGERUNNERS</h1>
+        <p class="text-xl md:text-2xl max-w-2xl text-cyan-400 font-bold uppercase tracking-[0.5em]">O custo de ser uma lenda.</p>
+    </header>
+
+    <main class="section-container">
+
+
+        <section id="historia" class="mb-32">
+            <h2 class="text-3xl cyber-font text-magenta-500 mb-10 flex items-center gap-4">
+                <span class="w-10 h-1px bg-magenta-500 block"></span> RESUMO OPERACIONAL
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="cyber-card">
+                    <p class="mb-6 text-lg leading-relaxed">
+                        A história de <strong>Cyberpunk: Edgerunners</strong> não é sobre triunfo, mas sobre o desespero de um jovem que tenta honrar o desejo de sua mãe em uma cidade que lucra com a pobreza. David Martinez, após perder Gloria, sua única âncora no mundo, descobre que a única forma de não ser esmagado é tornar-se mais forte — e menos humano.
+                    </p>
+                    <div class="critic-box">
+                        <p class="italic text-gray-400">
+                            "Em Night City, você morre como um ninguém ou vive o suficiente para ver o cromo te consumir."
+                        </p>
+                    </div>
+                </div>
+                <div class="image-placeholder h-full">
+                   <img class="img1" src="lucy and david.png"style="border-radius: 5%;" alt="">
+                </div>
+            </div>
+        </section>
+
+        <section id="personagens" class="mb-32">
+            <h2 class="text-3xl cyber-font text-yellow-400 mb-10 flex items-center gap-4">
+                <span class="w-10 h-1px bg-yellow-400 block"></span> ARQUIVOS DE PERSONAGENS
+            </h2>
+            
+            <div class="character-grid">
+                <!-- Maine -->
+                <div class="cyber-card">
+                    <div class="image-placeholder"><img src="maine.png"style="border-radius: 5%;" alt=""></div>
+                    <h3 class="text-xl cyber-font text-yellow-400 uppercase">Maine</h3>
+                    <p class="text-[10px] text-cyan-500 font-bold mb-2">STATUS: FALECIDO // CAUSA: CIBERPSICOSE</p>
+                    <p class="text-gray-400 text-xs mb-4">Líder do grupo e mentor de David. Um mercenário que acreditava que quanto mais cromo, melhor. Seu declínio mental serviu como o primeiro grande aviso para David sobre os limites do corpo humano.</p>
+                    <div class="stat-bar"><div class="stat-fill" style="width: 98%"></div></div>
+                </div>
+
+                <!-- Dorio -->
+                <div class="cyber-card">
+                    <div class="image-placeholder"><img src="dorio.png"style="border-radius: 5%;" alt=""></div>
+                    <h3 class="text-xl cyber-font text-pink-400 uppercase">Dorio</h3>
+                    <p class="text-[10px] text-cyan-500 font-bold mb-2">STATUS: FALECIDA // CAUSA: COMBATE</p>
+                    <p class="text-gray-400 text-xs mb-4">A força e a voz da razão. Braço direito de Maine, Dorio era a estabilidade do grupo. Sua lealdade a Maine, mesmo diante da loucura dele, custou sua vida no cerco da NCPD.</p>
+                    <div class="stat-bar"><div class="stat-fill" style="width: 90%; background: #f472b6;"></div></div>
+                </div>
+
+                <!-- Gloria -->
+                <div class="cyber-card">
+                    <div class="image-placeholder"><img src="Gloria Martinez.png" style="border-radius: 5%;" alt=""></div>
+                    <h3 class="text-xl cyber-font text-white uppercase">Gloria Martinez</h3>
+                    <p class="text-[10px] text-gray-500 font-bold mb-2">STATUS: FALECIDA // CAUSA: NEGLIGÊNCIA MÉDICA</p>
+                    <p class="text-gray-400 text-xs mb-4">Trabalhava exaustivamente como paramédica para pagar os estudos de David. Sua morte trágica em um acidente, seguida pela recusa de atendimento por falta de seguro, é o catalisador da história.</p>
+                    <div class="stat-bar"><div class="stat-fill" style="width: 20%; background: #9ca3af;"></div></div>
+                </div>
+
+                <!-- Pillar -->
+                <div class="cyber-card">
+                    <div class="image-placeholder"><img src="pilar.png" style="border-radius: 5%;" alt=""></div>
+                    <h3 class="text-xl cyber-font text-cyan-400 uppercase">Pillar</h3>
+                    <p class="text-[10px] text-red-500 font-bold mb-2">STATUS: FALECIDO // CAUSA: CIBERPSICOPATA</p>
+                    <p class="text-gray-400 text-xs mb-4">O técnico irreverente e irmão de Rebecca. Conhecido por suas mãos cibernéticas longas e humor ácido. Foi a primeira baixa inesperada da equipe principal nas mãos de um desconhecido.</p>
+                    <div class="stat-bar"><div class="stat-fill" style="width: 75%; background: var(--cp-cyan);"></div></div>
+                </div>
+
+                <!-- Lucy -->
+                <div class="cyber-card">
+                    <div class="image-placeholder"><img src="lucy.png" style="border-radius: 5%;" alt=""></div>
+                    <h3 class="text-xl cyber-font text-blue-400 uppercase">Lucy</h3>
+                    <p class="text-[10px] text-green-500 font-bold mb-2">STATUS: ATIVA // LOCALIZAÇÃO: LUA</p>
+                    <p class="text-gray-400 text-xs mb-4">Netrunner com um passado traumático na Arasaka. Buscou em David uma conexão real e sonhou com a Lua para escapar do sufocamento de Night City.</p>
+                    <div class="stat-bar"><div class="stat-fill" style="width: 85%; background: #60a5fa;"></div></div>
+                </div>
+
+                <!-- Rebecca -->
+                <div class="cyber-card">
+                    <div class="image-placeholder"><img src="Rebeca.png" style="border-radius: 5%;" alt=""></div>
+                    <h3 class="text-xl cyber-font text-magenta-500 uppercase">Rebecca</h3>
+                    <p class="text-[10px] text-red-600 font-bold mb-2">STATUS: FALECIDA // CAUSA: ADAM SMASHER</p>
+                    <p class="text-gray-400 text-xs mb-4">A alma do grupo após a morte de Pillar. Rebecca demonstrou uma lealdade inabalável a David, aceitando seu destino ao lado dele até o último segundo.</p>
+                    <div class="stat-bar"><div class="stat-fill" style="width: 80%; background: var(--cp-magenta);"></div></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="estetica" class="mb-32">
+            <h2 class="text-3xl cyber-font text-cyan-400 mb-10 flex items-center gap-4">
+                <span class="w-10 h-1px bg-cyan-400 block"></span> ANATOMIA VISUAL DO STUDIO TRIGGER
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div class="cyber-card">
+                    <h3 class="text-xl cyber-font text-yellow-400 mb-4 uppercase">Saturação e Psicologia</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                        O Studio Trigger abandonou o tom "sujo e cinzento" do cyberpunk clássico em favor de uma <strong>saturação fluorescente</strong>. O uso de cores primárias não é apenas decorativo:
+                    </p>
+                    <ul class="tech-list text-gray-400 text-xs">
+                        <li><strong>Amarelo Vibrante:</strong> Identidade de David, simbolizando energia juvenil e uma "chama que queima o dobro da intensidade".</li>
+                        <li><strong>Azul Neon e Magenta:</strong> Representam a artificialidade da cidade e a vida de Netrunner (Lucy).</li>
+                        <li><strong>Vermelho Sangue:</strong> Utilizado em flashes rápidos durante cenas de violência para enfatizar o choque e a perda de controlo.</li>
+                    </ul>
+                </div>
+                <div class="image-placeholder h-full">
+                   <img src="david2.png" alt="">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="image-placeholder h-full">
+                    <img src="sandy.png"  style="border-radius: 5%;" alt="">
+                </div>
+                <div class="cyber-card">
+                    <h3 class="text-xl cyber-font text-magenta-500 mb-4 uppercase">A Cinética da Ciberpsicose</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                        A estética traduz a <strong>desconexão neurológica</strong> através de técnicas de animação experimental:
+                    </p>
+                    <ul class="tech-list text-gray-400 text-xs">
+                        <li><strong>After-Images (Rastros):</strong> Representam a velocidade do Sandevistan, mas também como a percepção do tempo de David se fragmenta.</li>
+                        <li><strong>Quadros Sobrepostos:</strong> Durante surtos de ciberpsicose, a imagem "treme" e sobrepõe cenas passadas, simulando um erro de processamento no cérebro cibernético.</li>
+                        <li><strong>HUD Diegético:</strong> Os menus de chamada e mira não são para o espectador, eles fazem parte da visão dos personagens, reforçando que eles nunca estão "desconectados".</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: CRÍTICA SOCIAL (REFEITA) -->
+        <section id="sociedade" class="pb-20">
+            <div class="bg-magenta-900/10 border border-magenta-500/20 p-10 relative">
+                <div class="absolute -top-4 left-10 bg-magenta-500 text-black px-4 py-1 cyber-font text-sm font-bold">
+                    ANÁLISE DE IMPACTO SOCIAL
+                </div>
+                
+                <h2 class="text-4xl cyber-font text-white mb-8 uppercase leading-tight">O Ciclo de<br><span class="text-magenta-500 italic">Descartabilidade</span></h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <div class="critic-box">
+                            <h3 class="text-xl cyber-font text-yellow-400 mb-2 uppercase">A Pobreza como Sentença</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                David Martinez começa como um "outsider" na escola de elite. Ele sofre bullying não por falta de inteligência, mas por sua <strong>roupa velha e software desatualizado</strong>. Em Night City, se você não pode pagar pela atualização, você é invisível ou um alvo.
+                            </p>
+                        </div>
+                        <div class="critic-box" style="border-color: var(--cp-cyan);">
+                            <h3 class="text-xl cyber-font text-cyan-400 mb-2 uppercase">O Trauma do Capital</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                A cena em que Gloria é deixada na estrada porque a ambulância da Trauma Team prioriza um cliente corporativo é a crítica mais pesada do anime. A vida humana é uma <strong>variável de custo</strong>. David é forçado ao crime não por maldade, mas porque o sistema fechou todas as portas legítimas.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="bg-black/60 p-6 border border-yellow-400/30">
+                            <h3 class="text-lg cyber-font text-yellow-400 mb-4 uppercase">A Evolução do Sofrimento</h3>
+                            <p class="text-gray-400 text-xs mb-4">
+                                1. <strong>Escassez:</strong> Incapacidade de pagar por updates básicos de lavandaria ou educação.<br>
+                                2. <strong>Negligência:</strong> Perda da família devido à falta de seguro saúde.<br>
+                                3. <strong>Alienação:</strong> Substituição do próprio corpo por máquinas para tentar "pertencer" ou ser útil.<br>
+                                4. <strong>Autodestruição:</strong> O colapso final onde o indivíduo se torna a arma que o sistema usa e descarta.
+                            </p>
+                        </div>
+                     
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-black py-10 border-t border-gray-800 text-center">
+        <p class="cyber-font text-[10px] text-gray-600 tracking-widest">ERROR: HUMANITY_NOT_FOUND // SYSTEM_OVERRIDE_ACTIVE</p>
+    </footer>
+
+    <script>
+        function scrollToSec(id) {
+            const el = document.getElementById(id);
+            if(el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.classList.remove('active');
+                    if(item.innerText.toLowerCase().includes(id.substring(0,3))) {
+                        item.classList.add('active');
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
